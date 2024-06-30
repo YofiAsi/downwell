@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://bg15ftcpbwpoc"]
+
+[ext_resource type="Texture2D" uid="uid://c21n547pw02h4" path="res://Art/Animated objects/Card.png" id="1_3xhr3"]
+[ext_resource type="Script" path="res://card.gd" id="1_l6462"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l8sw8"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5nei"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vh0s"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kcbc"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2kj3"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj3yu"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f76y"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccmce"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ejk"]
+atlas = ExtResource("1_3xhr3")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qcnwt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5nei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vh0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kcbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2kj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj3yu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5f76y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccmce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ejk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 27.0
+}]
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_l6462")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_l8sw8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_qcnwt")
+frame_progress = 0.804172
