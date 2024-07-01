@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfp4vw4o6sb5w"]
+
+[ext_resource type="Texture2D" uid="uid://cgvnqvqkjrj76" path="res://Art/Objects/Stones/1.png" id="1_cimmt"]
+[ext_resource type="Script" path="res://stone_bullet.gd" id="1_kol51"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_joeqj"]
+radius = 4.0
+
+[node name="StoneBullet" type="Node2D"]
+script = ExtResource("1_kol51")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cimmt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_joeqj")

@@ -7,10 +7,8 @@ const JUMP_VELOCITY = -400.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_falling: bool = false
-
+@export var weapon: Weapon = null
 @onready var parent = get_parent()
-
-@export var weapon: PackedScene
 
 func _physics_process(delta):	
 	# Add the gravity.
@@ -54,18 +52,19 @@ func _physics_process(delta):
 
 
 func fire():
-	print("fire")
-	if not $Timer.is_stopped():
+	if not $FIreRateTimer.is_stopped() or weapon == null:
 		return
 	
+	var new_child = weapon.shoot()
+	new_child.position = position
+	get_parent().add_child(new_child)
+	
+	recoil()
+	
+	$FIreRateTimer.start(weapon.fire_rate)
+
+func recoil():
 	if velocity.y < 0:
-		velocity.y += -150.0
+		velocity.y -= weapon.recoil
 	else:
-		velocity.y = -150.0
-	$Timer.start()
-	
-	var n = weapon.instantiate()
-	n.velocity.y = 1000.0
-	n.position = position
-	
-	parent.add_child(n)
+		velocity.y = - weapon.recoil

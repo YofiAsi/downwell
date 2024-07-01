@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bthi31j15a0pd"]
+
+[ext_resource type="Script" path="res://stone_shotgun.gd" id="1_puyeo"]
+[ext_resource type="PackedScene" uid="uid://cfp4vw4o6sb5w" path="res://stone_bullet.tscn" id="2_bm5x4"]
+
+[node name="StoneShotgun" type="Node2D"]
+script = ExtResource("1_puyeo")
+stone_bullet = ExtResource("2_bm5x4")

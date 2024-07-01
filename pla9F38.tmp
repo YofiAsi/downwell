@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dstr8ergqwere" path="res://Art/Owlet_Monster/Owlet_Monster_Jump_8.png" id="1_t4qrs"]
 [ext_resource type="Script" path="res://player.gd" id="1_vr4bb"]
+[ext_resource type="Resource" uid="uid://c2apty4ddhqn1" path="res://card_weapon.tres" id="2_7cpat"]
 [ext_resource type="Texture2D" uid="uid://wn1wnyfiswqy" path="res://Art/Owlet_Monster/Owlet_Monster_Walk_6.png" id="2_ipoua"]
-[ext_resource type="Resource" uid="uid://bsyi2pl35rhte" path="res://stone_shotgun.tres" id="2_umuj4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkqnp"]
 atlas = ExtResource("1_t4qrs")
@@ -122,7 +122,7 @@ size = Vector2(16, 24)
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_vr4bb")
-weapon = ExtResource("2_umuj4")
+weapon = ExtResource("2_7cpat")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qnuvm")
@@ -132,6 +132,6 @@ animation = &"fall"
 position = Vector2(-1, 4)
 shape = SubResource("RectangleShape2D_ex0wp")
 
-[node name="FIreRateTimer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bsyi2pl35rhte"]
+
+[ext_resource type="PackedScene" uid="uid://bthi31j15a0pd" path="res://stone_shotgun.tscn" id="1_78gga"]
+[ext_resource type="Script" path="res://weapon_resource.gd" id="1_hx4u3"]
+
+[resource]
+script = ExtResource("1_hx4u3")
+scene = ExtResource("1_78gga")
+name = ""
+damage = 4.0
+fire_rate = 2.0
+recoil = 300.0
