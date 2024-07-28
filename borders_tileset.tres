@@ -1,13 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjafl4uttg5fp"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cw4yt611655v5"]
 
-[ext_resource type="Script" path="res://test.gd" id="1_slv70"]
-[ext_resource type="PackedScene" uid="uid://ccbd33ftirph3" path="res://player.tscn" id="1_x0am0"]
-[ext_resource type="PackedScene" uid="uid://1twqkk5xj38t" path="res://walls.tscn" id="2_7yc8s"]
-[ext_resource type="PackedScene" uid="uid://chn45lldgxpnn" path="res://background.tscn" id="3_4gygw"]
-[ext_resource type="Texture2D" uid="uid://bmygu7tata55o" path="res://Art/Tileset/Tileset_Borders.png" id="5_v7rwn"]
+[ext_resource type="Texture2D" uid="uid://bmygu7tata55o" path="res://Art/Tileset/Tileset_Borders.png" id="1_h2u2u"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2pkeb"]
-texture = ExtResource("5_v7rwn")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jo8r3"]
+texture = ExtResource("1_h2u2u")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -107,6 +103,7 @@ texture = ExtResource("5_v7rwn")
 7:3/0 = 0
 7:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:3/0/physics_layer_0/angular_velocity = 0.0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0, -8, 8, 8, 8, 8, 0)
 8:3/0 = 0
 8:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:3/0/physics_layer_0/angular_velocity = 0.0
@@ -134,12 +131,14 @@ texture = ExtResource("5_v7rwn")
 6:4/0 = 0
 6:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:4/0/physics_layer_0/angular_velocity = 0.0
+6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 0, 8, 8, 8, 8, -8)
 7:4/0 = 0
 7:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:4/0/physics_layer_0/angular_velocity = 0.0
 8:4/0 = 0
 8:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:4/0/physics_layer_0/angular_velocity = 0.0
+8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 0, 8, 0, -8, -8, -8)
 9:4/0 = 0
 9:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:4/0/physics_layer_0/angular_velocity = 0.0
@@ -158,6 +157,10 @@ texture = ExtResource("5_v7rwn")
 6:5/0 = 0
 6:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:5/0/physics_layer_0/angular_velocity = 0.0
+7:5/0 = 0
+7:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:5/0/physics_layer_0/angular_velocity = 0.0
+7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 0, 8, 0, 8, -8)
 8:5/0 = 0
 8:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:5/0/physics_layer_0/angular_velocity = 0.0
@@ -317,33 +320,7 @@ texture = ExtResource("5_v7rwn")
 8:12/0 = 0
 8:12/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:12/0/physics_layer_0/angular_velocity = 0.0
-7:5/0 = 0
-7:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:5/0/physics_layer_0/angular_velocity = 0.0
-7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 0, 8, 0, 8, -8, -8, -8, -8, -8, -8, -8)
 
-[sub_resource type="TileSet" id="TileSet_aewjl"]
+[resource]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_2pkeb")
-
-[node name="test" type="Node2D"]
-script = ExtResource("1_slv70")
-
-[node name="player" parent="." instance=ExtResource("1_x0am0")]
-position = Vector2(384, 48)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-zoom = Vector2(1.5, 1.5)
-
-[node name="Background" parent="." instance=ExtResource("3_4gygw")]
-
-[node name="walls" parent="." instance=ExtResource("2_7yc8s")]
-position = Vector2(216, 0)
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_aewjl")
-format = 2
-layer_0/tile_data = PackedInt32Array(262166, 458752, 5, 262167, 458752, 5, 262168, 458752, 5, 262169, 458752, 5, 524303, 458752, 5, 524304, 458752, 5, 524305, 458752, 5, 524306, 458752, 5, 524307, 458752, 5, 524308, 458752, 5, 524309, 458752, 5, 851987, 458752, 5, 851988, 458752, 5, 851989, 458752, 5, 851990, 458752, 5, 851991, 458752, 5, 1114142, 458752, 5, 1114141, 458752, 5, 1114140, 458752, 5, 1114139, 458752, 5, 1114138, 458752, 5, 1114137, 458752, 5, 1114136, 458752, 5, 1376273, 458752, 5, 1376274, 458752, 5, 1966097, 458752, 5, 1966098, 458752, 5, 2031635, 458752, 5, 2031636, 458752, 5, 2097173, 458752, 5, 2424863, 458752, 5, 2490398, 458752, 5, 2555934, 458752, 5, 2621469, 458752, 5, 2687004, 458752, 5, 2752539, 458752, 5, 2818075, 458752, 5, 2883610, 458752, 5, 2949145, 458752, 5, 2949144, 458752, 5, 2949143, 458752, 5, 2949142, 458752, 5, 3997715, 458752, 5, 3997716, 458752, 5, 3997717, 458752, 5, 3997718, 458752, 5, 3997719, 458752, 5, 3997720, 458752, 5, 3997721, 458752, 5, 3997722, 458752, 5, 3997723, 458752, 5, 4784142, 458752, 5, 4784143, 458752, 5, 4784144, 458752, 5, 4784145, 458752, 5, 4784146, 458752, 5, 4718610, 458752, 5, 4718611, 458752, 5, 4718612, 458752, 5, 4718613, 458752, 5, 4718614, 458752, 5, 4718615, 458752, 5, 4718616, 458752, 5, 4718617, 458752, 5, 4718618, 458752, 5, 4718619, 458752, 5, 4718620, 458752, 5, 4718621, 458752, 5, 4718622, 458752, 5, 4718623, 458752, 5, 4718624, 458752, 5)
-
-[connection signal="make_new_walls" from="walls" to="." method="_on_walls_make_new_walls"]
+sources/0 = SubResource("TileSetAtlasSource_jo8r3")
