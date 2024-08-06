@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://ccbd33ftirph3"]
+[gd_scene load_steps=29 format=3 uid="uid://ccbd33ftirph3"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_vr4bb"]
+[ext_resource type="Resource" uid="uid://cw4ywtxw2p0xy" path="res://regular_weapon.tres" id="2_ea02y"]
 [ext_resource type="Texture2D" uid="uid://b82u5co6k4vp7" path="res://Art/Main_Characters/Char_Boy.png" id="3_cc8dc"]
+[ext_resource type="Texture2D" uid="uid://cqixe4hvditks" path="res://Art/GUI/Numbers.png" id="4_frpbr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ex0wp"]
 size = Vector2(14, 24)
@@ -162,11 +164,26 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="player" type="CharacterBody2D"]
+[sub_resource type="Theme" id="Theme_3nnjd"]
+ProgressBar/colors/color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obdbp"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x31u7"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="player" type="CharacterBody2D" groups=["bullet"]]
 z_index = 2
 script = ExtResource("1_vr4bb")
+weapon = ExtResource("2_ea02y")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["bullet"]]
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_ex0wp")
 
@@ -174,6 +191,41 @@ shape = SubResource("RectangleShape2D_ex0wp")
 wait_time = 0.2
 one_shot = true
 
+[node name="FireAfterJump" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_rl721")
-animation = &"fall"
+animation = &"walk"
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.08
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AmmunitionText" type="Sprite2D" parent="."]
+position = Vector2(-11, -22)
+texture = ExtResource("4_frpbr")
+hframes = 20
+vframes = 10
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -12.0
+offset_top = -30.0
+offset_right = 12.0
+offset_bottom = -27.0
+theme = SubResource("Theme_3nnjd")
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_obdbp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x31u7")
+value = 50.0
+show_percentage = false
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

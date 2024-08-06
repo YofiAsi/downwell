@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://bbhdilk1xu8aj"]
+
+[ext_resource type="Texture2D" uid="uid://d2ofgkexflfed" path="res://Art/Enemies/Alien3.png" id="1_5b0v3"]
+[ext_resource type="Script" path="res://regular_bullet.gd" id="1_qbwqg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq1vb"]
+atlas = ExtResource("1_5b0v3")
+region = Rect2(0, 232, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jaxbl"]
+atlas = ExtResource("1_5b0v3")
+region = Rect2(48, 232, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ddi"]
+atlas = ExtResource("1_5b0v3")
+region = Rect2(96, 232, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqa6f"]
+atlas = ExtResource("1_5b0v3")
+region = Rect2(144, 232, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq5fy"]
+atlas = ExtResource("1_5b0v3")
+region = Rect2(192, 232, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68uny"]
+atlas = ExtResource("1_5b0v3")
+region = Rect2(240, 232, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb5lf"]
+atlas = ExtResource("1_5b0v3")
+region = Rect2(288, 232, 48, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_12fpl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq1vb")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jaxbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ddi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqa6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rq5fy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68uny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb5lf")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 40.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_885oo"]
+radius = 5.0
+
+[node name="RegularBullet" type="Node2D" groups=["bullet"]]
+script = ExtResource("1_qbwqg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(7, -1)
+rotation = 1.55334
+sprite_frames = SubResource("SpriteFrames_12fpl")
+animation = &"hit"
+
+[node name="Area2D" type="Area2D" parent="." groups=["bullet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["does_dmg"]]
+shape = SubResource("CircleShape2D_885oo")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

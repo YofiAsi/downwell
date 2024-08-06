@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://cjo0up7p6a5b5"]
+
+[ext_resource type="Script" path="res://enemy_1.gd" id="1_o10un"]
+[ext_resource type="Texture2D" uid="uid://cs15fc63sxl34" path="res://Art/Enemies/Alien1.png" id="1_x77ch"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j67t"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kov8y"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhavm"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hek6t"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28r0j"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epugs"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l18x"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_654nf"]
+atlas = ExtResource("1_x77ch")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o2k41"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3j67t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kov8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhavm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hek6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28r0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epugs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l18x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_654nf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lpw6m"]
+size = Vector2(19, 29)
+
+[node name="Enemy1" type="Node2D"]
+script = ExtResource("1_o10un")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
+sprite_frames = SubResource("SpriteFrames_o2k41")
+frame_progress = 0.333498
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-0.5, -3.5)
+shape = SubResource("RectangleShape2D_lpw6m")

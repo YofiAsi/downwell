@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cw4ywtxw2p0xy"]
+
+[ext_resource type="PackedScene" uid="uid://bbhdilk1xu8aj" path="res://regular_bullet.tscn" id="1_3u0tx"]
+[ext_resource type="Script" path="res://weapon_resource.gd" id="1_6ppjb"]
+
+[resource]
+script = ExtResource("1_6ppjb")
+scene = ExtResource("1_3u0tx")
+name = ""
+damage = 10.0
+fire_rate = 0.1
+recoil = 100.0
+magazine = 10
+reload_time = 1.0

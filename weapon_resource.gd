@@ -6,6 +6,8 @@ extends Resource
 @export var damage: float
 @export var fire_rate: float
 @export var recoil: float
+@export var magazine: int
+@export var reload_time: float
 
 var fire_rate_timer: Timer = Timer.new()
 

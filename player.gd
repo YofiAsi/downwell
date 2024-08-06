@@ -10,24 +10,48 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_falling: bool = false
 @export var weapon: Weapon = null
 @onready var parent = get_parent()
+@onready var fire_wait = $FireAfterJump
+@onready var coyote_timer = $CoyoteTimer
+@onready var ammo_text = $AmmunitionText
+@onready var reload_progress_bar = $ProgressBar
 
-func _physics_process(delta):	
-	# Add the gravity.
+var jump_available: bool = true
+var was_on_floor: bool = true
+var is_reloading: bool = false
+var magazine: int = 0
+
+func _ready():
+	if weapon != null:
+		magazine = weapon.magazine
+		ammo_text.frame_coords = Vector2i(magazine % 10, int(magazine / 10))
+
+func _physics_process(delta):		
 	if not is_on_floor():
+		if was_on_floor:
+			was_on_floor = false
+			coyote_timer.start()
+		
 		velocity.y += gravity * delta
 		velocity.y = max(velocity.y, MAX_FALL_SPEED)
-	elif is_falling:
-		is_falling = false
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.frame = 0
-		$AnimatedSprite2D.stop()
+	else:
+		jump_available = true
+		was_on_floor = true
+		if is_falling:
+			is_falling = false
+			
+			$AnimatedSprite2D.animation = "walk"
+			$AnimatedSprite2D.frame = 0
+			$AnimatedSprite2D.stop()
 	
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept"):
-		if is_on_floor():
+	if Input.is_action_pressed("ui_accept"):
+		if jump_available:
+			jump_available = false
+			was_on_floor = false
 			velocity.y = JUMP_VELOCITY
+			fire_wait.start()
 			$AnimatedSprite2D.play("jump")
-		else:
+		if not is_on_floor() and fire_wait.is_stopped():
 			fire()
 	
 	if velocity.y > 0:
@@ -50,23 +74,53 @@ func _physics_process(delta):
 	else:
 		$AnimatedSprite2D.stop()
 
+	if is_reloading:
+		reload_progress_bar.value = 100 * (weapon.reload_time - $ReloadTimer.time_left) / weapon.reload_time
+
 	move_and_slide()
 
-
-func fire():
-	if not $FIreRateTimer.is_stopped() or weapon == null:
+func reload():
+	reload_progress_bar.visible = true
+	reload_progress_bar.value = 0
+	
+	if weapon == null:
 		return
-	
-	var new_child = weapon.shoot()
-	new_child.position = position
-	get_parent().add_child(new_child)
-	
-	recoil()
-	
-	$FIreRateTimer.start(weapon.fire_rate)
+	is_reloading = true
+	$ReloadTimer.start(weapon.reload_time)
+
+func fire():	
+	if magazine > 0:
+		if not $FIreRateTimer.is_stopped() or weapon == null:
+			return
+		
+		var new_child = weapon.shoot()
+		new_child.position = position + Vector2(0, 16)
+		get_parent().add_child(new_child)
+		
+		recoil()
+		magazine -= 1
+		ammo_text.frame_coords = Vector2i(magazine % 10, int(magazine / 10))
+		$FIreRateTimer.start(weapon.fire_rate)
+		
+	if magazine <= 0 and not is_reloading:
+		reload()	
 
 func recoil():
 	if velocity.y < 0:
 		velocity.y -= weapon.recoil
 	else:
 		velocity.y = - weapon.recoil
+
+
+func _on_coyote_timer_timeout():
+	if not is_on_floor():
+		jump_available = false
+
+
+func _on_reload_timer_timeout():
+	is_reloading = false
+	reload_progress_bar.visible = false
+	if weapon != null:
+		magazine = weapon.magazine
+		ammo_text.frame_coords = Vector2i(magazine % 10, int(magazine / 10))
+		
